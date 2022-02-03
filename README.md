@@ -10,26 +10,25 @@ How about some thinking, eating, sleeping people.
 ### Arguments:  
 
 - number_of_philosophers  
-- time_to_die  
+- `time_to_die`  
 	The time between the philosopher STARTED a meal and needs to start the next meal. (start eating -> finish eating -> sleep -> (think) -> start eating).  
-- time_to_eat
+- `time_to_eat`
 	The time needed for each philosopher to finish a meal. (take up both forks -> put down both forks)  
-- time_to_sleep  
+- `time_to_sleep`  
 	The time needed for each philosopher to sleep. (satart to sleep -> wake up)  
-- [number_of_times_each_philosopher_must_eat]  
+- `[number_of_times_each_philosopher_must_eat]`  
 	Optional. The number of time each philosopher must eat. (Ex: 3 means each philosopher must eat "AT LEAST" 3 meals.)  
 
 ### Notions:  
-- The return vale of "gettimeofday"
-- How to use "pthread\_\*" functions.(pthread\_create(), pthread\_mutex\_\* ... etc)  
+- The return vale of `gettimeofday()`
+- How to use `pthread_*` functions.(`pthread_create()`, `pthread_mutex_*` ... etc)  
 - How to manipulate mutexes. 
-- after "pthread\_mutex\_init", we don't really need to destroy?  
-- calling "pthread\_mutex\_lock" multiple times in the same thread will not block the code execution.  
-
+- after `pthread_mutex_init`, we don't really need to destroy?  
+- calling `pthread_mutex_lock` multiple times in the same thread.    
 
 ### The MAKING:  
-1. Set up a "t\_shared\_info" struct to store necessary informations.
-2. Set up a "t\_philo" struct and create as many "t\_philo"s according to the argument(number\_of\_philosophers) given.  
+1. Set up a "t_info" struct to store necessary informations.
+2. Set up a "t_philo" struct and create as many "t_philo"s according to the argument(`number_of_philosophers`) given.  
 3. Write functions to check and store arguments.  
 4. Write functions to initialize information needed during the simulation.  
 5. Create "philo" threads and all the "forks(mutexs)".  
