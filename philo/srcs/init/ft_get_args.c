@@ -31,13 +31,13 @@ static int	ft_check_args(int ac, char **av)
 
 	index = 1;
 	if (ac < 5 || ac > 6)
-		return (1);
+		return (ERR_ARGS_AMOUNT);
 	while (index < ac)
 	{
 		if (av[index][0] == '-')
-			return (3);
+			return (ERR_ARGS_NEG);
 		if (!ft_isnum(av[index]))
-			return (2);
+			return (ERR_ARGS_NAN);
 		index++;
 	}
 	return (0);

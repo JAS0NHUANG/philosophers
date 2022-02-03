@@ -12,9 +12,11 @@
 
 enum	e_error_code
 {
+	ERR_ARGS_AMOUNT = 1,
+	ERR_ARGS_NAN,
+	ERR_ARGS_NEG,
 	ERR_GETTIME,
 };
-
 
 /*--------------------------------------------------------------------------->>
 **    structs
@@ -29,39 +31,36 @@ typedef struct	s_args
 	int	must_eat;
 }		t_args;
 
-
 typedef struct	s_philo
 {
-	pthread_t	*philo_thread;
+	pthread_t		philo_thread;
 	pthread_mutex_t	left_fork;
 	pthread_mutex_t	*right_fork;
-	int		meal_eaten;
+	int				meal_eaten;
 }		t_philo;
 
-typedef struct	s_info
+typedef struct	s_data
 {
-	t_philo		**philos_array;
+	t_philo			*philos_array;
 	unsigned long	start_time;
-	pthread_mutex_t	printer_mutex;
-	pthread_mutex_t	meal_eaten_adder;
-
-
-}		t_info;
+	pthread_mutex_t	printer_lock;
+	pthread_mutex_t	meal_eaten_lock;
+}		t_data;
 
 /*--------------------------------------------------------------------------->>
 **	philo.c
 */
-
-int	ft_get_args(int ac, char **av, t_args **args);
-int	ft_init_info(t_info **info);
+int		ft_get_args(int ac, char **av, t_args **args);
+int		ft_init_data(t_data **data);
 void	ft_print_error(int error_code);
-void	ft_free_all(t_args *args, t_info *info);
+void	ft_free_all(t_args *args, t_data *data);
 
 /*--------------------------------------------------------------------------->>
 *	utils
 */
-int		ft_isdigit(int c);
-int		ft_atoi(const char *str);
+int				ft_isdigit(int c);
+int				ft_atoi(const char *str);
 unsigned long	ft_get_time_in_ms(void);
+void			ft_debuger(t_args *args, t_data *data);
 
 #endif

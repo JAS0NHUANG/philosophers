@@ -27,13 +27,14 @@ SRCS_DIR	=	srcs
 INCS_DIR	=	incs
 
 SRCS		=	philo.c \
-			ft_get_args.c \
-			ft_init_info.c \
-			ft_print_error.c \
-			ft_free_all.c \
+			init/ft_get_args.c \
+			init/ft_init_data.c \
 			utils/ft_isdigit.c \
 			utils/ft_atoi.c \
 			utils/ft_get_time_in_ms.c \
+			utils/ft_debuger.c \
+			ft_free_all.c \
+			ft_print_error.c \
 
 INCS		=	philo.h	\
 

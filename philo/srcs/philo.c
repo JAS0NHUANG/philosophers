@@ -1,60 +1,48 @@
 #include "philo.h"
 
-void	ft_debuger(t_args *args, t_info *info)
+void	*ft_philos_routine(void *philo)
 {
-	if (args)
-	{
-		printf("args-------------------------------------------->\n");
-		printf("nbr philo: %d\n", args->nbr_philo);
-		printf("t t die: %d\n", args->t_t_die);
-		printf("t t eat: %d\n", args->t_t_eat);
-		printf("t t sleep: %d\n", args->t_t_sleep);
-		printf("must eat: %d\n", args->must_eat);
-		printf("------------------------------------------------>\n\n");
-	}
-	if (info)
-	{
-		printf("info-------------------------------------------->\n");
-		printf("start time in ms: %ld\n", info->start_time);
-		printf("printer mutex addr: %p\n", &(info->printer_mutex));
-		printf("------------------------------------------------>\n\n");
-	}
+	(void)philo;
+	printf("hello philo\n");
+	return (NULL);
 }
 
-void	ft_init_philos(t_args *args, t_philo ***philos_array)
+void	ft_init_philos(int nbr_philo, t_philo **philos_array)
 {
-	*philos_array = malloc(sizeof(t_philo *) * args->nbr_philo);
+	int	index;
+	printf("nbr philo:%d\n", nbr_philo);
+	*philos_array = malloc(sizeof(t_philo) * nbr_philo);
+
+	index = 0;
+	while (index < nbr_philo)
+	{
+		pthread_create(&(philos_array[index]->philo_thread), NULL, ft_philos_routine, (void *)philos_array[index]);
+		index++;
+	}
 }
 
 int	main(int ac, char **av)
 {
 	int	ret_value;
 	t_args	*args;
-	t_info	*info;
-	t_philo	**philos_array;
+	t_data	*data;
+	t_philo	*philos_array;
 
 
 	ret_value = 0;
 	args = NULL;
-	info = NULL;
+	data = NULL;
+	philos_array = NULL;
 	ret_value = ft_get_args(ac, av, &args);
 	if (ret_value != 0)
 		ft_print_error(ret_value);
 	else
 	{
-		ft_init_info(&info);
-		ft_init_philos(args, &philos_array);
-		info->philos_array = philos_array;
+		ft_init_data(&data);
+		ft_debuger(args, data);
+		ft_init_philos(args->nbr_philo, &philos_array);
 	}
-	pthread_mutex_lock(&(info->printer_mutex));
-	printf("locked\n");
-	pthread_mutex_unlock(&(info->printer_mutex));
-	pthread_mutex_lock(&(info->printer_mutex));
-	printf("locked again\n");
-	pthread_mutex_unlock(&(info->printer_mutex));
-	pthread_mutex_lock(&(info->printer_mutex));
-	printf("locked again and again\n");
-	ft_debuger(args, info);
-	ft_free_all(args, info);
+	ft_debuger(args, data);
+	ft_free_all(args, data);
 	return (ret_value);
 }

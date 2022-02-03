@@ -1,14 +1,14 @@
 #include "philo.h"
 
-void	ft_free_all(t_args *args, t_info *info)
+void	ft_free_all(t_args *args, t_data *data)
 {
 	if (args)
 		free(args);
-	if (info)
+	if (data)
 	{
-		pthread_mutex_destroy(&(info->printer_mutex));
-		if (info->philos_array)
-			free(info->philos_array);
-		free(info);
+		pthread_mutex_destroy(&(data->printer_lock));
+		if (data->philos_array)
+			free(data->philos_array);
+		free(data);
 	}
 }
