@@ -22,6 +22,7 @@ How about some thinking, eating, sleeping people.
 ### Notions:  
 - The return vale of `gettimeofday()`
 - How to use `pthread_*` functions.(`pthread_create()`, `pthread_mutex_*` ... etc)  
+	Why the "*** stack smashing detected ***: terminated" error occured? Why there will be SIGABRT?
 - How to manipulate mutexes. 
 - after `pthread_mutex_init`, we don't really need to destroy?  
 - calling `pthread_mutex_lock` multiple times in the same thread without unlock (the code after the second one will be suspended.)    

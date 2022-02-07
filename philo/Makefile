@@ -17,6 +17,7 @@ CFLAGS		=	-Wall -Wextra -Werror
 PTHREAD		=	-pthread
 FSAN		=	-fsanitize=address
 DEBUG		=	-g3
+FNO_STACK	=	-fno-stack-protector
 RF		=	-rf
 
 # **************************************************************************** #
@@ -53,6 +54,9 @@ all			:	$(NAME)
 
 leak_check	:	$(OBJS)
 			$(CC) -o $@ $(OBJS) -I $(INCS_DIR) $(FSAN)
+
+fno_stack	:	$(OBJS)
+			$(CC) -o $@ $(OBJS) -I $(INCS_DIR) $(CFLAGS) $(PTHREAD) $(FNO_STACK)
 
 clean		:
 			$(RM) $(RF) $(OBJS)

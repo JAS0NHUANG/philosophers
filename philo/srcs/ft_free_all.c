@@ -6,7 +6,8 @@ void	ft_free_all(t_args *args, t_data *data)
 		free(args);
 	if (data)
 	{
-		pthread_mutex_destroy(&(data->printer_lock));
+		if (&(data->printer_lock))
+			pthread_mutex_destroy(&(data->printer_lock));
 		if (data->philos_array)
 			free(data->philos_array);
 		free(data);
