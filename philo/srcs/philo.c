@@ -2,10 +2,12 @@
 
 void	*ft_philos_routine(void *philo)
 {
+	t_philo		*philo_holder;
 
-	if (philo)
-		printf("hello philo\n");
-	return (NULL);
+	philo_holder = (t_philo *)philo;
+	printf("philo meal_eaten: %d\n", philo_holder->meal_eaten);
+	printf("philo philo_id: %d\n", philo_holder->philo_id);
+	printf("hello philo\n");
 }
 
 void	ft_init_philos(int nbr_philo, t_philo **philos_array)
@@ -18,8 +20,10 @@ void	ft_init_philos(int nbr_philo, t_philo **philos_array)
 	while (index < nbr_philo)
 	{
 		philos_array[index] = malloc(sizeof(t_philo));
-		pthread_create(&(philos_array[index]->philo_thread), NULL, &ft_philos_routine, (void *)&(philos_array[index]));
-		printf("index: %d, nbr philo: %d\n", index, nbr_philo);
+		philos_array[index]->meal_eaten = 0;
+		philos_array[index]->philo_id = index;
+		pthread_create(&(philos_array[index]->philo_thread), NULL,
+			&ft_philos_routine, (void *)philos_array[index]);
 		index++;
 	}
 	index = 0;

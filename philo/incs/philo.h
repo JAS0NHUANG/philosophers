@@ -33,10 +33,11 @@ typedef struct	s_args
 
 typedef struct	s_philo
 {
+	int				philo_id;
+	int				meal_eaten;
 	pthread_t		philo_thread;
 	pthread_mutex_t	left_fork;
 	pthread_mutex_t	*right_fork;
-	int				meal_eaten;
 }		t_philo;
 
 typedef struct	s_data
