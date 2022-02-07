@@ -8,13 +8,14 @@ void	*ft_philos_routine(void *philo)
 	printf("philo meal_eaten: %d\n", philo_holder->meal_eaten);
 	printf("philo philo_id: %d\n", philo_holder->philo_id);
 	printf("hello philo\n");
+	return (NULL);
 }
 
 void	ft_init_philos(int nbr_philo, t_philo **philos_array)
 {
 	int	index;
 	printf("nbr philo:%d\n", nbr_philo);
-	*philos_array = malloc(sizeof(t_philo) * nbr_philo);
+	philos_array = malloc(sizeof(t_philo *) * nbr_philo);
 
 	index = 0;
 	while (index < nbr_philo)
@@ -40,7 +41,7 @@ int	main(int ac, char **av)
 	int	ret_value;
 	t_args	*args;
 	t_data	*data;
-	t_philo	*philos_array;
+	t_philo	**philos_array;
 
 
 	ret_value = 0;
@@ -53,7 +54,7 @@ int	main(int ac, char **av)
 	else
 	{
 		ft_init_data(&data);
-		ft_init_philos(args->nbr_philo, &philos_array);
+		ft_init_philos(args->nbr_philo, philos_array);
 	}
 	ft_free_all(args, data);
 	return (ret_value);
