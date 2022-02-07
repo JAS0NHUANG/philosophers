@@ -9,7 +9,7 @@ How about some thinking, eating, sleeping people.
 
 ### Arguments:  
 
-- number_of_philosophers  
+- `number_of_philosophers`  
 - `time_to_die`  
 	The time between the philosopher STARTED a meal and needs to start the next meal. (start eating -> finish eating -> sleep -> (think) -> start eating).  
 - `time_to_eat`
@@ -27,8 +27,8 @@ How about some thinking, eating, sleeping people.
 - calling `pthread_mutex_lock` multiple times in the same thread without unlock (the code after the second one will be suspended.)    
 
 ### The MAKING:  
-1. Set up a "t_data" struct to store necessary informations.
-2. Set up a "t_philo" struct and create as many "t_philo"s according to the argument(`number_of_philosophers`) given.  
+1. Set up a `t_data` struct to store necessary informations.
+2. Set up a `t_philo` struct and create as many `t_philo`s according to the argument(`number_of_philosophers`) given.  
 3. Write functions to check and store arguments.  
 4. Write functions to initialize information needed during the simulation.  
 5. Create "philo" threads and all the "forks(mutexs)".  
@@ -36,7 +36,7 @@ How about some thinking, eating, sleeping people.
 
 ### How the program will run:  
 steps:
-1. get_arguments(ft_get_args) -> check_arguments
-2. init_data (init needed data. Ex: start time, printer_lock, 
-3. init_philo. 
+1. get arguments(`ft_get_args`) -> check arguments
+2. `init_data` (init needed data. Ex: start time, `printer_lock`, 
+3. `init_philo`. 
 4. start running simulation.  
