@@ -1,10 +1,10 @@
 
-void	*ft_philos_life(void *philo)
+void	*ft_philos_life(void *all)
 {
-	t_philo		*philo_holder;
+	t_all	*all_holder;
 
-	philo_holder = (t_philo *)philo;
-	printf("philo meal_eaten: %d\n", philo_holder->meal_eaten);
+	all_holder = (t_all *)all;
+	printf("philo meal_eaten: %d\n", all_holder->philo[meal_eaten);
 	printf("philo philo_id: %d\n", philo_holder->philo_id);
 	printf("hello philo\n");
 	return (NULL);

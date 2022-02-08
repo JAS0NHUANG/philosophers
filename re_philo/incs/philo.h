@@ -60,6 +60,7 @@ int		ft_get_info(int ac, char **av, t_all **all);
 int		ft_init_data(t_info **info);
 void	ft_print_error(int error_code);
 void	ft_free_all(t_all *all);
+int		ft_living_philosophers(t_all **all);
 
 /*---------------------------------------------------------------------------->>
 **	utils
