@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jahuang <jahuang@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jahuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/08 18:04:00 by jahuang           #+#    #+#             */
-/*   Updated: 2022/02/02 19:29:12 by jahuang          ###   ########.fr       */
+/*   Created: 2022/02/08 16:21:26 by jahuang           #+#    #+#             */
+/*   Updated: 2022/02/08 16:21:28 by jahuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
-
-int	ft_isdigit(int c)
+int	ft_strlen(char *str)
 {
-	return (c >= '0' && c <= '9');
+	int	length;
+
+	length = 0;
+	while (str[length])
+		length++;
+	return (length);
 }
