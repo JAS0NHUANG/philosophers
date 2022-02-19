@@ -116,7 +116,8 @@ t_philo
 
 from https://github.com/iciamyplant/Philosophers
 
-- tester: https://github.com/MichelleJiam/LazyPhilosophersTester
+- Lazy Tester https://github.com/MichelleJiam/LazyPhilosophersTester
+- Philosophers visualizer https://nafuka11.github.io/philosophers-visualizer/
 
 ### others:  
 	Why the `*** stack smashing detected ***: terminated` error occured?  
