@@ -31,67 +31,92 @@ Keep Philosophers alive
 - How to use `pthread_*` functions.  
 	(`pthread_create()`, `pthread_mutex_*` ... etc)  
 - How to manipulate mutexes. 
-- calling `pthread_mutex_lock` multiple times in the same thread without unlock  
-	(the code after the second one will be suspended.)  
-- others:  
-	Why the `*** stack smashing detected ***: terminated` error occured?  
-	Why there will be SIGABRT?  
-
-## Planning:  
 
 ### The MAKING:  
-1. Set up a GLOBAL container `t_all` to hold other struct's pointer.  
-2. Set up a `t_info` struct to hold arguments and other useful info.  
-3. Set up a `t_philo` struct to hold each philo's info.  
-	(create as many `t_philo`s according to the `number_of_philosophers`.)  
-4. Create a `forks_array` to hold all "forks"(mutex).  
+1. Set up a `t_data` struct to hold arguments and other useful info.  
 
 ```
 t_all
-	┃
-	┣━ (t_info *)info
-	┃
-	┣━ (t_philo *)philos_array
-	┃  [(t_philo 1), (t_philo 2), ..., (t_philo z)]
-	┃
-	┗━ (pthread_mutex_t *)forks_array
-	   [(fork 1), (fork 2), ..., (fork z)]
-
-t_info
-	┃  /* arguments */
-	┣━ (int)nbr_philo;
-	┃
-	┣━ (int)t_t_die;
-	┃
-	┣━ (int)t_t_eat;
-	┃
-	┣━ (int)t_t_sleep;
-	┃
-	┣━ (int)times_must_eat;
-	┃  /* others */
-	┣━ (unsigned long)start_time;
-	┃
-	┗━ (pthread_mutex_t)printer_lock;
-
-t_philo
-	┃
-	┣━ (int)philo_index;
-	┃
-	┣━ (pthread_t)philo_thread;
-	┃
-	┣━ (int)meal_eaten;
-	┃
-	┗━ (int)last_meal_time;
+┃
+┃  /* arguments */
+┣━ (int)nbr_philo;
+┃
+┣━ (int)t_t_die;
+┃
+┣━ (int)t_t_eat;
+┃
+┣━ (int)t_t_sleep;
+┃
+┣━ (int)must_eat;
+┃
+┃  /* others */
+┣━ (int)fed;
+┃
+┣━ (int)death;
+┃
+┣━ (unsigned long)start_time;
+┃
+┣━ (pthread_mutex_t)common_lock;
+┃
+┣━ (t_philo *)philos_array
+┃  [(t_philo 1), (t_philo 2), ..., (t_philo z)]
+┃
+┗━ (pthread_mutex_t *)forks_array
+   [(fork 1), (fork 2), ..., (fork z)]
 ```
 
-3. Write functions to check and store arguments.  
-4. Write functions to initialize information needed during the simulation.  
-5. Create "philo" threads and all the "forks(mutexs)".  
-6. Write the logic about the simulation.  
+2. Set up a `t_philo` struct to hold each philo's info.  
 
-### How the program will run:  
-steps:
-1. get arguments(`ft_get_args`) -> check arguments
-2. `init_data` (init needed data. Ex: start time, `printer_lock`, 
-3. `init_philo`. 
-4. start running simulation.  
+```
+t_philo
+┃
+┣━ (int)philo_index;
+┃
+┣━ (pthread_t)philo_thread;
+┃
+┣━ (unsigned long)last_meal_time;
+┃
+┣━ (int)meal_eaten;
+┃
+┣━ (int)has_right_fork;
+┃
+┗━ (int)has_left_fork;
+```
+
+3. create as many `t_philo`s according to the `number_of_philosophers`.  
+	store them into an array and put the pointer in `t_data`.  
+4. Create a `forks_array` to hold all "forks"(mutex) and also put a pointer in `t_data`.    
+5. Write functions to check and store arguments.  
+6. Write functions to initialize information needed during the simulation.  
+7. Initialize all the `mutexs`(forks) and the `common_lock`.  
+8. Write the `ft_philo_routine` function  as it will be called in each thread.  
+	inside the routine function:  
+	- Check if anybody is dead or if all philos are fed `must_eat` times.  
+	- Write all the "action" functions (take forks, eat, putdown forks, sleep, think).  
+	- Do some conditional check whenever needed.  
+	- Use the `common_lock` whenever there is possiable data race situation.   
+
+### Tests  
+| test | resultat attendu |
+|----------|-------|
+| ./philo 1 200 200 200 | philo 1 ne prend qu'une fourchette et meurt au bout de 200 ms |
+| ./philo 2 800 200 200 | personne ne meurt |
+| ./philo 5 800 200 200 | personne ne meurt |
+| ./philo 5 800 200 200 7 | la simulation s'arrete quand chaque philo a mange 7 fois|
+| ./philo 4 410 200 200 | personne ne meurt |
+| ./philo 4 310 200 200 | un philo meurt |
+| ./philo 4 500 200 1.2 | argument invalide |
+| ./philo 4 0 200 200 | argument invalide|
+| ./philo 4 -500 200 200 | argument invalide |
+| ./philo 4 500 200 2147483647 | un philo meurt au bout de 500 ms |
+| ./philo 4 2147483647 200 200 | personne ne meurt |
+| ./philo 4 214748364732 200 200 | argument invalide|
+| ./philo 4 200 210 200 | un philo meurt, il faut afficher la mort avant 210 ms |
+
+from https://github.com/iciamyplant/Philosophers
+
+- tester: https://github.com/MichelleJiam/LazyPhilosophersTester
+
+### others:  
+	Why the `*** stack smashing detected ***: terminated` error occured?  
+	Why there will be SIGABRT?  
