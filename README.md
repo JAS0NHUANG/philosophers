@@ -27,12 +27,13 @@ Keep Philosophers alive
 ## What to learn:  
 
 ### Notions:  
+- Introduction to multi-threading programing.  
 - The usage of time related functions: `gettimeofday()` and `usleep()`  
 - How to use `pthread_*` functions.  
 	(`pthread_create()`, `pthread_mutex_*` ... etc)  
 - How to manipulate mutexes. 
 
-### The MAKING:  
+## The MAKING:  
 1. Set up a `t_data` struct to hold arguments and other useful info.  
 
 ```

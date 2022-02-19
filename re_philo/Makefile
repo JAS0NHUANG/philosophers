@@ -30,6 +30,7 @@ INCS_DIR	=	incs
 SRCS		=	philo.c \
 				ft_get_info.c \
 				ft_print_error.c \
+				ft_living_philosophers.c \
 				utils/ft_free_and_exit.c \
 				utils/ft_isdigit.c \
 				utils/ft_atoi.c \
