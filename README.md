@@ -1,5 +1,4 @@
 # Philosophers
-How about some thinking, eating, sleeping PHILOSOPHERs.
 
 ## Subject:  
 
