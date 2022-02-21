@@ -95,7 +95,9 @@ int	ft_sleeping(t_philo **philo)
 	{
 		ft_sleep_ms((*philo)->data->t_t_die - (*philo)->data->t_t_eat);
 		ft_print_action(philo, DIE);
+		pthread_mutex_lock(&((*philo)->data->common_lock));
 		(*philo)->data->death += 1;
+		pthread_mutex_unlock(&((*philo)->data->common_lock));
 		ft_putdown_forks(philo);
 		return (1);
 	}
@@ -119,7 +121,9 @@ int	ft_thinking(t_philo **philo)
 		ft_sleep_ms((*philo)->data->t_t_die - (*philo)->data->t_t_eat - \
 				(*philo)->data->t_t_sleep);
 		ft_print_action(philo, DIE);
+		pthread_mutex_lock(&((*philo)->data->common_lock));
 		(*philo)->data->death += 1;
+		pthread_mutex_unlock(&((*philo)->data->common_lock));
 		ft_putdown_forks(philo);
 		return (1);
 	}
