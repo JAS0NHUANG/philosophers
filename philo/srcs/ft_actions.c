@@ -6,7 +6,7 @@
 /*   By: jahuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:38:29 by jahuang           #+#    #+#             */
-/*   Updated: 2022/02/21 06:40:32 by jahuang          ###   ########.fr       */
+/*   Updated: 2022/02/21 06:48:55 by jahuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ int	ft_sleeping(t_philo **philo)
 	if (!ft_still_alive(philo) && ft_all_fed(philo))
 		return (1);
 	if ((*philo)->data->t_t_sleep >= (*philo)->data->t_t_die || \
-		(*philo)->data->t_t_sleep + (*philo)->data->t_t_eat >= (*philo)->data->t_t_die)
+		(*philo)->data->t_t_sleep + (*philo)->data->t_t_eat >= \
+		(*philo)->data->t_t_die)
 	{
 		ft_sleep_ms((*philo)->data->t_t_die - (*philo)->data->t_t_eat);
 		ft_print_action(philo, DIE);
