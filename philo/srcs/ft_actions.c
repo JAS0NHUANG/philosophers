@@ -6,7 +6,7 @@
 /*   By: jahuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:38:29 by jahuang           #+#    #+#             */
-/*   Updated: 2022/02/19 06:47:55 by jahuang          ###   ########.fr       */
+/*   Updated: 2022/02/21 06:40:32 by jahuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,10 @@ int	ft_thinking(t_philo **philo)
 	if (ft_get_time_in_ms() + (unsigned long)(*philo)->data->t_t_eat < \
 		(*philo)->last_meal_time + (unsigned long)(*philo)->data->t_t_die)
 		ft_sleep_ms((*philo)->data->t_t_eat + 10);
-	if ((*philo)->data->t_t_die <= (*philo)->data->t_t_eat * 2)
+	if ((*philo)->data->t_t_die <= (*philo)->data->t_t_eat * 2 || \
+		((*philo)->data->t_t_die <= \
+		(*philo)->data->t_t_eat * 2 + (*philo)->data->t_t_sleep && \
+		(*philo)->data->nbr_philo % 2 != 0))
 	{
 		ft_sleep_ms((*philo)->data->t_t_die - (*philo)->data->t_t_eat - \
 				(*philo)->data->t_t_sleep);
