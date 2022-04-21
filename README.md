@@ -118,6 +118,10 @@ from https://github.com/iciamyplant/Philosophers
 - Lazy Tester https://github.com/MichelleJiam/LazyPhilosophersTester
 - Philosophers visualizer https://nafuka11.github.io/philosophers-visualizer/
 
+### Leak and data race testing
+- with fsanitize: `-g fsanitize=thread
+- with valgrind: `valgrind --tool=helgrind`
+
 ### others:  
 	Why the `*** stack smashing detected ***: terminated` error occured?  
 	Why there will be SIGABRT?  
